@@ -1,0 +1,43 @@
+progressive web app - sa lucreze pentru orice user pe orice browser
+		    - sa fie responsive
+		    - sa aiba un grad de conectivity independence
+		    - sa aiba o navigare tip aplicatie
+		    - sa fie mereu up-to-date		
+		    - sa fie safe
+		    - sa nu fie greu de inteles si utilizat
+
+un user poate propune un task si poate adauga o persoana sa il execute intr-o perioada de timp specificata
+doar userul care a propus task-ul si cel care este adaugat la task poate viziona informatiile despre taskul respectiv
+userul care a propus task-ul poate expune public informatiile despre task
+fiecare task are : interval orar(sau data de finish) ; descriere ; skill-uri necesare (optional) ; framework-uri necesare(optional), putem adauga pe parcurs
+dupa finalizare, userul asignat task-ului, dupa ce l-a terminat, adauga dovezi(un url, o poza, cod sursa, text, documente etc.)
+Functionalitate de istoric al taskurilor : pentru fiecare user, pentru fiecare tip de task (task creat de el sau task la care a fost asignat) avem liste cu taskurile trecute
+Functionalitate de statistici : pentru toti userii, pe o pagina separata vom oferi statistici (proprii si globale)
+Functionalitate de notificari : in browser, pentru fiecare user
+*Optional* Functionalitate de friends/offline chat 
+*Optional* Functionalitate de comentarii
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

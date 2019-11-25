@@ -1,0 +1,19 @@
+Single App Page 
+RestAPI  -  backend in NodeJS
+	 -  frontend in HTML+CSS+JS
+MySQL
+
+
+DOCUMENTAREA API : 
+
+Register : Nume / Prenume / Email / Data Nasterii / Job / Studii / Calificari (modificabil) / Parola / Resetare parola
+Login : Email / Parola
+Terminarea unui task : A terminat? Da ==> Dovada( selectie : URL, fisier) Nu ==> Motivul
+Crearea unui task : Nume task / Descriere task / Data terminare / Id User asignat / Alte informatii
+Pagina de statistici : GET-uri si manipulari de date in api , GET pentru varsta / GET pentru taskuri rezolvate cu succes / GET pentru timp 
+Notificari : Atunci cand userul a fost adaugat la un task == primeste notificare // cand un user asignat a trimis un raspuns la taskul propriu
+
+
+Javascript cod ==> Clasa User : this.firstName = Prenume , this.lastName = Nume , etc 
+	       ==> Clasa Task : this.taskID = generatorTID()  etc.
+	       ==> Modul pentru prelucrare statistici

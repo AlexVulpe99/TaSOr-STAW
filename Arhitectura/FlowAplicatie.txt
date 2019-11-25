@@ -1,0 +1,11 @@
+User isi poate face cont == register
+User se poate autentifica          == astea doua pot intra doar la autentificare 
+				   == facem legatura cu baza de date/ tabela users
+Pagina pe care intra prima data e pagina unde ii afisam task-urile pe care le are de terminat
+In meniu ii punem :
+			- Pagina pentru Creare taskuri - unde vede si taskurile pe care le-a creat el si inca sunt active(nu au fost terminate)
+			- Pagina pentru Taskuri realizate cu succes - aici ii punem si taskurile pe care le-a terminat el si taskurile pe care le-a creat si au fost terminate
+			- Pagina de statistici - aici ii punem statistici (vedem noi ce statistici putem sa bagam)
+			- Buton de logout
+O sa mai avem mereu intr-un colt ceva buton de notificare
+O sa facem SinglePageApp
