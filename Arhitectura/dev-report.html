@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>TaSOr Dev report</title>
+</head>
+
+<body>
+    <header>
+        <h1 style="text-align: center;">Developer Guide - TaSOr</h1>
+    </header>
+
+    <div role="contentinfo" style="text-align: center">
+        <dl>
+            <dt>Autori:</dt>
+            <dd>
+                <a href="https://www.facebook.com/alex.vulpe.10">Alexandru Vulpe</a>
+                &amp;
+                <a href="https://www.facebook.com/cristi.anghel.10">Anghel Cristi</a>
+            </dd>
+        </dl>
+    </div>
+
+    <section id="introduction" role="doc-introduction">
+        <!-- review? -->
+        <h2>1. Introducere</h2>
+        <p>
+            Sa se realizeze un sistem online de tip PWA capabil sa gestioneze timpul de efectuare a unor activitati.
+        </p>
+        <p>PWA(Progressive web application) presupune ca aplicatia noastra sa contina urmatoarele: </p>
+        <div style="margin-left: 15px;">
+            <p>-sa funtioneze pentru orice user pe orice browser</p>
+            <p>-sa fie responsive</p>
+            <p>-sa aiba un grad de conectivity independence</p>
+            <p>-sa aiba o navigare tip aplicatie</p>
+            <p>-sa fie mereu la up-to-date</p>
+            <p>-sa fie safe</p>
+            <p>-sa nu fie greu de utilizat si inteles</p>
+        </div>
+    </section>
+
+    <section id="structure">
+        <h2>2. Structura</h2>
+    </section>
+    <section id="frontend">
+        <p>Aplicatia la nivel de client va contine cod <a href="https://www.w3schools.com/html/">HTML</a>, <a
+                href="https://www.w3schools.com/css/">CSS</a> si <a href="https://www.javascript.com/">JAVASCRIPT</a>.
+    </section>
+    <section id="backend">
+        <p>Aplicatia la nivel de server va contine cod <a href="https://www.javascript.com/">JAVASCRIPT</a> si vom
+            folosi baza de date relationala <a href="https://www.mysql.com/">MySQL</a> si <a
+                href="https://nodejs.org/en/">NodeJS</a> engine.</p>
+    </section>
+    <section id="legatura">
+        <p>Tipologia preferabila pentru aceasta aplicatie este <a
+                href="http://blog.fhblackinc.com/thin-clients-vs-fat-clients-explained"> "Fat Server" - "Thin Client"
+            </a> cu serverul care va pune la dispozitie un <a
+                href="https://searchapparchitecture.techtarget.com/definition/RESTful-API">REST API</a> si clientul care
+            va consuma API-ul.
+        </p>
+    </section>
+
+    <section id="detalii">
+        <h2>3. Detalii de implementare</h2>
+        <section id="detalii-backend">
+            <h4>3.1. Backend</h4>
+            <p>Baza de date <a href="https://www.mysql.com/">MySQL</a> care va avea principalele legaturi prezentate mai
+                jos.</p>
+            <img src="DBLogic.png" style="width: 400px; height: 200px;">
+            <p>Codul din backend va contine clasele Task si User care vor face manipulare de informatii pe baza de date
+                si vor avea urmatoarea structura:</p>
+            <img src="codeExemple.png" style="width: 400px; height: 200px;">
+            <p>Vom utiliza si <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules">module</a>
+                pentru Notificari, TaskResponse, TaskDescription si pentru statistici.</p>
+        </section>
+        <section id="detalii-frontend">
+            <h4>3.2 Frontend</h4>
+            <p>Pentru a mentine cat mai simpla partea de client, vom folosi doar apeluri asincrone catre API.</p>
+        </section>
+        <section id="detalii-API">
+            <h4>3.3 API</h4>
+            <p><a href="https://smartbear.com/learn/performance-monitoring/api-endpoints/">Endpoint</a>-urile vor fi:
+            </p>
+            <div style="margin-left: 15px;">
+                <p> '/register' - POST ==> creaza un nou user in baza de date : <a href="#frontend">Clientul</a> trimite
+                    informatiile structurate intr-un <a href="http://www.json.org/">JSON</a>. </p>
+                <p> '/login' - POST ==> se verifica parola : <a href="#frontend">Clientul</a> trimite
+                    informatiile structurate intr-un <a href="http://www.json.org/">JSON</a></p>
+                <p> '/createdtasks' - GET ==> task-urile create de utilizator: <a href="#backend">Serverul</a> trimite
+                    informatiile structurate intr-un <a href="http://www.json.org/">JSON</a></p>
+                <p> '/asignedtasks' - GET ==> task-urile unui utilizator: <a href="#backend">Serverul</a> trimite
+                    informatiile structurate intr-un <a href="http://www.json.org/">JSON</a></p>
+                <p> '/taskresponse' - POST ==> raspunul unui task : task-urile create de utilizator: <a
+                        href="#frontend">Clientul</a> trimite
+                    informatiile structurate intr-un <a href="http://www.json.org/">JSON</a></p>
+            </div>
+        </section>
+    </section>
+
+    <section id="flow">
+        <h2>4. Flow-ul aplicatiei</h2>
+        <p>Un user poate propune un task si poate adauga o persoana sa il execute intr-o perioada de timp specificata
+        </p>
+        <p>Doar userul care a propus task-ul si cel care este adaugat la task poate viziona informatiile despre taskul
+            respectiv</p>
+        <p>Userul care a propus task-ul poate expune public informatiile despre task</p>
+        <p>Fiecare task contine : </p>
+        <div style="margin-left: 15px;">
+            <p>-interval orar sau data de finish </p>
+            <p>-descriere acestuia </p>
+            <p>-skill-uri/cunostinte necesare (optional)</p>
+            <p>-framework-uri necesare(optional)</p>
+        </div>
+        <p>Dupa finalizarea task-ului, userul asignat task-ului respectiv, adauga dovezi(un url, o poza, cod sursa,
+            text, documente etc.)</p>
+        <p>Functionalitati: </p>
+        <div style="margin-left: 15px;">
+            <p>-istoric al taskurilor : pentru fiecare user, pentru fiecare tip de task (task creat de el sau task la
+                care a fost asignat) avem liste cu taskurile precedente</p>
+            <p>-statistici : pentru toti userii, pe o pagina separata vom oferi statistici (proprii si globale)</p>
+            <p>-notificari : acestea vor aparea in browser, pentru fiecare user</p>
+        </div>
+
+    </section>
+</body>
+
+</html>
