@@ -1,0 +1,91 @@
+.form__label {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.2rem;
+    margin-left: 2rem;
+    margin-top: 0.7rem;
+    display: block;
+    transition: all 0.3s;
+    transform: translateY(-4rem);
+}
+
+.form__input {
+    font-family: 'Roboto', sans-serif;
+    color: #333;
+    font-size: 1.2rem;
+    margin: 0 auto;
+    padding: 1.5rem 2rem;
+    border-radius: 0.2rem;
+    background-color: rgb(255, 255, 255);
+    border: none;
+    width: 70%;
+    display: block;
+    border-bottom: 0.3rem solid transparent;
+    transition: all 0.3s;
+}
+
+.form__input:placeholder-shown+.form__label {
+    opacity: 0;
+    visibility: hidden;
+    -webkit-transform: translateY(-4rem);
+    transform: translateY(-4rem);
+}
+
+.button,
+.tick {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: sans-serif;
+}
+
+.button {
+    width: 300px;
+    height: 80px;
+    background: dodgerblue;
+    border-radius: 6px;
+    transition: all .3s cubic-bezier(0.67, 0.17, 0.40, 0.83);
+    margin: auto;
+}
+
+.button svg {
+    transform: rotate(180deg);
+    transition: all .5s;
+}
+
+.button__circle {
+    width: 120px;
+    height: 120px;
+    background: mediumseagreen;
+    border-radius: 50%;
+    transform: rotate(-180deg);
+}
+
+.button:hover {
+    cursor: pointer;
+}
+
+.tick {
+    color: white;
+    font-size: 2em;
+    transition: all .9s;
+}
+
+@media screen and (max-width:500px) {
+    .form__label {
+        display: none;
+    }
+    .form__input {
+        margin-bottom: 5%;
+    }
+    .button {
+        width: 100px;
+        height: 50px;
+    }
+    .tick {
+        font-size: 12px;
+    }
+    .button__circle {
+        width: 50;
+        height: 50px;
+    }
+}

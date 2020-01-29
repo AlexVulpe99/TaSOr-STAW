@@ -1,0 +1,40 @@
+<link href="./src/css/login.css" rel="stylesheet">
+
+
+<h2 class="cloud-text">Task Organizer</h2>
+<div class="container" id="container">
+    <div class="form-container sign-up-container">
+        <div class="form">
+            <h1>Create Account</h1>
+            <input id="registerEmail" type="email" placeholder="Email" required/>
+            <input id="registerPassword" type="password" placeholder="Password" required/>
+            <input id="registerPasswordRepeat" type="password" placeholder="Repeat Password" required/>
+            <button id="registerBtn">Sign Up</button>
+        </div>
+    </div>
+    <div class="form-container sign-in-container">
+        <div class="form">
+            <h1>Sign in</h1>
+            <input id="loginEmail" type="email" placeholder="Email" required/>
+            <input id="loginPassword" type="password" placeholder="Password" required/>
+            <a href="#">Forgot your password?</a>
+            <button id="loginBtn">Sign In</button>
+        </div>
+    </div>
+    <div class="overlay-container">
+        <div class="overlay">
+            <div class="overlay-panel overlay-left">
+                <h1>Welcome Back!</h1>
+                <p>To keep connected with us please login with your personal info</p>
+                <button class="ghost" id="signIn">Sign In</button>
+            </div>
+            <div class="overlay-panel overlay-right">
+                <h1>Hello!</h1>
+                <p>Enter your personal details and start journey with us</p>
+                <button class="ghost" id="signUp">Sign Up</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="./src/js/login.js"></script>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="./src/css/main.css" rel="stylesheet">
+    <link href="./src/css/new-task.css" rel="stylesheet">
+    <title>Task Organizer</title>
+</head>
+
+<body onload="getEmailsForSelect()">
+    ${ require('./navbar.html') }
+
+    <h3>Create a task and assign someone to it</h3>
+    <div class="form__group">
+        <input type="text" class="form__input" id="name" placeholder="Task name" required />
+        <label for="name" class="form__label">Task Name</label>
+    </div>
+    <div class="form__group">
+        <input type="text" class="form__input" id="description" placeholder="Description" required />
+        <label for="description" class="form__label">Description</label>
+    </div>
+    <div class="form__group">
+        <input type="datetime-local" class="form__input" id="finish-date" placeholder="Finish Date" required />
+        <label for="finish-date" class="form__label">Finish Date</label>
+    </div>
+    <div class="form__group">
+        <input type="text" class="form__input" id="util-links" placeholder="Util links" required />
+        <label for="util-links" class="form__label">Util links</label>
+    </div>
+    <div class="form__group">
+        <input type="text" class="form__input" id="info" placeholder="Additional Info" required />
+        <label for="info" class="form__label">Additional Info</label>
+    </div>
+    <div class="form__group">
+        <select id="assigned-users" multiple>
+            
+        </select>
+    </div>
+
+
+    <div class="button">
+        <div class="container">
+            <div class="tick">
+            </div>
+        </div>
+    </div> ${ require('./footer.html') }
+</body>
+
+<script src="./src/js/new-task.js"></script>
+
+</html>

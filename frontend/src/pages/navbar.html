@@ -1,0 +1,63 @@
+<link href="./src/css/navbar.css" rel="stylesheet">
+
+
+<nav class="main-menu">
+    <ul>
+        <li>
+            <a href="home.html">
+                <i class="fa fa-home fa-2x"></i>
+                <span class="nav-text">
+                    Dashboard
+                </span>
+            </a>
+
+        </li>
+        <li class="has-subnav">
+            <a href="new-task.html">
+                <i class="fa fa-list fa-2x"></i>
+                <span class="nav-text">
+                    Create New Task
+                </span>
+            </a>
+
+        </li>
+        <li class="has-subnav">
+            <a href="finished-tasks.html">
+                <i class="fa fa-folder-open fa-2x"></i>
+                <span class="nav-text">
+                    Finished Tasks
+                </span>
+            </a>
+
+        </li>
+        <li>
+            <a href="statistics.html">
+                <i class="fa fa-bar-chart-o fa-2x"></i>
+                <span class="nav-text">
+                    Statistics
+                </span>
+            </a>
+        </li>
+    </ul>
+
+    <ul class="logout">
+        <li>
+            <a href="javascript:logout();">
+                <i class="fa fa-power-off fa-2x"></i>
+                <span class="nav-text">
+                    Logout
+                </span>
+            </a>
+        </li>
+    </ul>
+</nav>
+<script>
+    function deleteCookie(name) {
+        document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    }
+
+    function logout() {
+        deleteCookie('accessToken');
+        window.location.href = "./index.html";
+    }
+</script>
