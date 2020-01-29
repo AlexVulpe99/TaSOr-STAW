@@ -30,7 +30,7 @@ function checkAuthToken() {
 const loginButton = document.getElementById('loginBtn');
 const registerButton = document.getElementById('registerBtn');
 
-const urlAPI = "http://localhost:4000/auth";
+const urlAPI = "https://tasorapi.herokuapp.com/auth";
 
 
 loginButton.addEventListener('click', () => {

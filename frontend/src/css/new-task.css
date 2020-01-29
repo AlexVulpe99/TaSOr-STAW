@@ -23,6 +23,15 @@
     transition: all 0.3s;
 }
 
+select {
+    margin-left: 15%;
+    margin-bottom: 5%;
+    width: 70%;
+    font-size: 1.2rem;
+    font-family: 'Roboto', sans-serif;
+    color: #333;
+}
+
 .form__input:placeholder-shown+.form__label {
     opacity: 0;
     visibility: hidden;
@@ -75,6 +84,9 @@
         display: none;
     }
     .form__input {
+        margin-bottom: 5%;
+    }
+    select {
         margin-bottom: 5%;
     }
     .button {

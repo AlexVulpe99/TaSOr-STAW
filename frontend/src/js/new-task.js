@@ -1,8 +1,21 @@
-let urlAPI = "http://localhost:4000"
+let urlAPI = "https://tasorapi.herokuapp.com"
 
 function getCookie(key) {
     var keyValue = document.cookie.match('(^|;) ?' + key + '=([^;]*)(;|$)');
     return keyValue ? keyValue[2] : null;
+}
+
+function compare(a, b) {
+    const emailA = a._id.toUpperCase();
+    const emailB = b._id.toUpperCase();
+
+    let comparison = 0;
+    if (emailA > emailB) {
+        comparison = 1;
+    } else if (emailA < emailB) {
+        comparison = -1;
+    }
+    return comparison;
 }
 
 
@@ -27,7 +40,8 @@ function getEmailsForSelect() {
                     alert(data['message']);
                 } else {
                     //console.log(data['data']);
-                    data['data'].forEach(element => {
+                    let array = data['data'].sort(compare);
+                    array.forEach(element => {
                         let option = document.createElement("option");
                         option.value = element._id;
                         option.innerText = element._id;
@@ -54,13 +68,46 @@ button.addEventListener('click', function() {
     if (buttonText.innerHTML !== "Submit") {
         buttonText.innerHTML = "Submit";
     } else if (buttonText.innerHTML === "Submit") {
-        let dataFinish = document.getElementById("finish-date").value.slice(0, 19).replace('T', ' ');
-        //console.log(dataFinish);
-        let taskName = document.getElementById("name").value;
-        let description = document.getElementById("description").value;
-        let utilLinks = document.getElementById("util-links").value;
-        let info = document.getElementById("info").value;
+        let data = new FormData();
+        data.append('taskName', document.getElementById("name").value);
+        data.append('description', document.getElementById("description").value);
+        data.append('utilLinks', document.getElementById("util-links").value);
+        data.append('info', document.getElementById("info").value);
+        data.append('date', document.getElementById("finish-date").value.slice(0, 19).replace('T', ' '));
 
+        const selected = document.querySelectorAll('#assigned-users option:checked');
+        const assignedUsers = Array.from(selected).map(el => el.value);
+
+        assignedUsers.forEach(element => {
+            data.append('assignedTo', element);
+        });
+        let token = getCookie('accessToken');
+        if (!token) {
+            window.location = './index.html';
+        }
+
+        fetch(urlAPI + '/tasks', {
+                method: 'POST',
+                mode: 'cors',
+                body: new URLSearchParams(data),
+                headers: new Headers({
+                    'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
+                    'Authorization': 'Bearer ' + token
+                })
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                if (!data['success']) {
+                    alert(data['message']);
+                    window.location = './new-task.html';
+                } else {
+                    alert(data['message']);
+                    window.location = './new-task.html';
+                }
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
 
 
         buttonText.innerHTML = tickMark;

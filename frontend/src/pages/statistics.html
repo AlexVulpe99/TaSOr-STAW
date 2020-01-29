@@ -9,8 +9,16 @@
     <title>Task Organizer</title>
 </head>
 
-<body>
-    ${ require('./navbar.html') } ${ require('./footer.html') }
+<body onload="getTasks()">
+    ${ require('./navbar.html') }
+
+    <link href="./src/css/statistics.css" rel="stylesheet">
+
+    <div id="tasks">Records</div>
+
+    ${ require('./footer.html') }
 </body>
+<script src="./src/js/statistics.js"></script>
+<script src="./src/js/main.js"></script>
 
 </html>
