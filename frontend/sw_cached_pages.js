@@ -1,4 +1,4 @@
-const cacheName = 'v1';
+const cacheName = 'v2';
 
 const cacheAssets = [
     './src/pages/home.html',
@@ -23,24 +23,14 @@ const cacheAssets = [
     './src/index.js'
 ];
 
-// Call Install Event
-self.addEventListener('install', e => {
-    //console.log('Service Worker: Installed');
-
-    e.waitUntil(
-        caches
-        .open(cacheName)
-        .then(cache => {
-            // console.log('Service Worker: Caching Files');
-            cache.addAll(cacheAssets);
-        })
-        .then(() => self.skipWaiting())
-    );
+self.addEventListener('install', async e => {
+    const cache = await caches.open(cacheName);
+    await cache.addAll(cacheAssets);
+    return self.skipWaiting();
 });
 
-// Call Activate Event
 self.addEventListener('activate', e => {
-    // console.log('Service Worker: Activated');
+    self.clients.claim();
     // Remove unwanted caches
     e.waitUntil(
         caches.keys().then(cacheNames => {
@@ -56,14 +46,31 @@ self.addEventListener('activate', e => {
     );
 });
 
-// Call Fetch Event
-self.addEventListener('fetch', (e) => {
-    // console.log('Service Worker: Fetching')
-    if (e.request.url.indexOf(location.origin) === 0) {
-        const clonedRequest = e.request.clone();
-        e.respondWith(
-            caches.match(e.request)
-            .then(resp => resp || fetch(clonedRequest))
-        );
+self.addEventListener('fetch', async e => {
+    const req = e.request;
+    const url = new URL(req.url);
+
+    if (url.origin === location.origin) {
+        e.respondWith(cacheFirst(req));
+    } else {
+        e.respondWith(networkAndCache(req));
     }
 });
+
+async function cacheFirst(req) {
+    const cache = await caches.open(cacheName);
+    const cached = await cache.match(req);
+    return cached || fetch(req);
+}
+
+async function networkAndCache(req) {
+    const cache = await caches.open(cacheName);
+    try {
+        const fresh = await fetch(req);
+        await cache.put(req, fresh.clone());
+        return fresh;
+    } catch (e) {
+        const cached = await cache.match(req);
+        return cached;
+    }
+}
