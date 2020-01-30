@@ -43,7 +43,7 @@ loginButton.addEventListener('click', () => {
             mode: 'cors',
             body: new URLSearchParams(data),
             headers: new Headers({
-                'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                'Content-type': 'application/x-www-form-urlencoded'
             })
         })
         .then((response) => response.json())

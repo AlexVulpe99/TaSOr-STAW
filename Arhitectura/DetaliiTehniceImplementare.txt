@@ -1,19 +1,15 @@
-Single App Page 
-RestAPI  -  backend in NodeJS
+
+RestAPI  -  backend in NodeJS + Express
 	 -  frontend in HTML+CSS+JS
-MySQL
+MongoDB
 
 
-DOCUMENTAREA API : 
+DOCUMENTAREA API : https://tasorapi.herokuapp.com/api-docs/
 
-Register : Nume / Prenume / Email / Data Nasterii / Job / Studii / Calificari (modificabil) / Parola / Resetare parola
+Register : Email / Parola / Resetare parola
 Login : Email / Parola
-Terminarea unui task : A terminat? Da ==> Dovada( selectie : URL, fisier) Nu ==> Motivul
-Crearea unui task : Nume task / Descriere task / Data terminare / Id User asignat / Alte informatii
-Pagina de statistici : GET-uri si manipulari de date in api , GET pentru varsta / GET pentru taskuri rezolvate cu succes / GET pentru timp 
-Notificari : Atunci cand userul a fost adaugat la un task == primeste notificare // cand un user asignat a trimis un raspuns la taskul propriu
+Terminarea unui task : A terminat? Da ==> Dovada(URL) Nu ==> Motivul
+Crearea unui task : Nume task / Descriere task / Data terminare / Email User asignat / Alte informatii
+Pagina de statistici : GET pentru taskuri respinse, GET pentru taskuri rezolvate cu succes 
+Notificari : Atunci cand userul a fost adaugat la un task == primeste notificare // mail
 
-
-Javascript cod ==> Clasa User : this.firstName = Prenume , this.lastName = Nume , etc 
-	       ==> Clasa Task : this.taskID = generatorTID()  etc.
-	       ==> Modul pentru prelucrare statistici

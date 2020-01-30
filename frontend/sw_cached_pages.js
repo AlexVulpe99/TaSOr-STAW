@@ -2,9 +2,7 @@ const cacheName = 'v2';
 
 const cacheAssets = [
     './src/pages/home.html',
-    './src/pages/index.html',
     './src/pages/footer.html',
-    './src/pages/login.html',
     './src/pages/navbar.html',
     './src/pages/new-task.html',
     './src/pages/statistics.html',
@@ -16,7 +14,6 @@ const cacheAssets = [
     './src/css/new-task.css',
     './src/css/statistics.css',
     './src/js/home.js',
-    './src/js/login.js',
     './src/js/main.js',
     './src/js/new-task.js',
     './src/js/statistics.js',
@@ -31,13 +28,11 @@ self.addEventListener('install', async e => {
 
 self.addEventListener('activate', e => {
     self.clients.claim();
-    // Remove unwanted caches
     e.waitUntil(
         caches.keys().then(cacheNames => {
             return Promise.all(
                 cacheNames.map(cache => {
                     if (cache !== cacheName) {
-                        // console.log('Service Worker: Clearing Old Cache');
                         return caches.delete(cache);
                     }
                 })
@@ -46,31 +41,18 @@ self.addEventListener('activate', e => {
     );
 });
 
-self.addEventListener('fetch', async e => {
-    const req = e.request;
-    const url = new URL(req.url);
-
-    if (url.origin === location.origin) {
-        e.respondWith(cacheFirst(req));
-    } else {
-        e.respondWith(networkAndCache(req));
+self.addEventListener('fetch', function onFetch(event) {
+    if (event.request.url.indexOf(location.origin) === 0) {
+        event.respondWith(cacheOrNetwork(event));
     }
 });
 
-async function cacheFirst(req) {
-    const cache = await caches.open(cacheName);
-    const cached = await cache.match(req);
-    return cached || fetch(req);
+function cacheOrNetwork(event) {
+    const clonedRequest = event.request.clone();
+    return caches.match(event.request).then(resp => resp || fetch(clonedRequest));
 }
 
-async function networkAndCache(req) {
-    const cache = await caches.open(cacheName);
-    try {
-        const fresh = await fetch(req);
-        await cache.put(req, fresh.clone());
-        return fresh;
-    } catch (e) {
-        const cached = await cache.match(req);
-        return cached;
-    }
+function networkOrCache(event) {
+    const clonedRequest = event.request.clone();
+    return fetch(event.request).catch(err => caches.match(clonedRequest));
 }

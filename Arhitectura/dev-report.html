@@ -17,8 +17,7 @@
         <dl>
             <dt>Autori:</dt>
             <dd>
-                <a href="https://www.facebook.com/alex.vulpe.10">Alexandru Vulpe</a>
-                &amp;
+                <a href="https://www.facebook.com/alex.vulpe.10">Alexandru Vulpe</a> &amp;
                 <a href="https://www.facebook.com/cristi.anghel.10">Anghel Cristi</a>
             </dd>
         </dl>
@@ -34,7 +33,7 @@
         <div style="margin-left: 15px;">
             <p>-sa funtioneze pentru orice user pe orice browser</p>
             <p>-sa fie responsive</p>
-            <p>-sa aiba un grad de conectivity independence</p>
+            <p>-sa aiba un grad de conectivity independence -> <a href="https://developers.google.com/web/fundamentals/primers/service-workers">Service Worker</a></p>
             <p>-sa aiba o navigare tip aplicatie</p>
             <p>-sa fie mereu la up-to-date</p>
             <p>-sa fie safe</p>
@@ -46,20 +45,13 @@
         <h2>2. Structura</h2>
     </section>
     <section id="frontend">
-        <p>Aplicatia la nivel de client va contine cod <a href="https://www.w3schools.com/html/">HTML</a>, <a
-                href="https://www.w3schools.com/css/">CSS</a> si <a href="https://www.javascript.com/">JAVASCRIPT</a>.
+        <p>Aplicatia la nivel de client va contine cod <a href="https://www.w3schools.com/html/">HTML</a>, <a href="https://www.w3schools.com/css/">CSS</a> si <a href="https://www.javascript.com/">JAVASCRIPT</a>.
     </section>
     <section id="backend">
-        <p>Aplicatia la nivel de server va contine cod <a href="https://www.javascript.com/">JAVASCRIPT</a> si vom
-            folosi baza de date relationala <a href="https://www.mysql.com/">MySQL</a> si <a
-                href="https://nodejs.org/en/">NodeJS</a> engine.</p>
+        <p>Aplicatia la nivel de server va contine cod <a href="https://www.javascript.com/">JAVASCRIPT</a> si vom folosi baza de date NoSQL <a href="https://www.mongodb.com/">MongoDB</a> si <a href="https://nodejs.org/en/">NodeJS</a> engine.</p>
     </section>
     <section id="legatura">
-        <p>Tipologia preferabila pentru aceasta aplicatie este <a
-                href="http://blog.fhblackinc.com/thin-clients-vs-fat-clients-explained"> "Fat Server" - "Thin Client"
-            </a> cu serverul care va pune la dispozitie un <a
-                href="https://searchapparchitecture.techtarget.com/definition/RESTful-API">REST API</a> si clientul care
-            va consuma API-ul.
+        Serverul care va pune la dispozitie un <a href="https://searchapparchitecture.techtarget.com/definition/RESTful-API">REST API</a> si clientul care va consuma API-ul.
         </p>
     </section>
 
@@ -67,61 +59,61 @@
         <h2>3. Detalii de implementare</h2>
         <section id="detalii-backend">
             <h4>3.1. Backend</h4>
-            <p>Baza de date <a href="https://www.mysql.com/">MySQL</a> care va avea principalele legaturi prezentate mai
-                jos.</p>
-            <img src="DBLogic.png" style="width: 400px; height: 200px;">
-            <p>Codul din backend va contine clasele Task si User care vor face manipulare de informatii pe baza de date
-                si vor avea urmatoarea structura:</p>
-            <img src="codeExemple.png" style="width: 400px; height: 200px;">
-            <p>Vom utiliza si <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules">module</a>
-                pentru Notificari, TaskResponse, TaskDescription si pentru statistici.</p>
+            <p>Baza de date <a href="https://www.mongodb.com">MongoDB</a> care va avea principalele colectii prezentate mai jos.
+            </p>
+            <img src="assets/DBPicture.png" style="width: 400px; height: 200px;">
+            <p>Codul din backend va contine clasele Task si User care vor face manipulare de informatii pe baza de date si vor avea urmatoarea structura:</p>
+            <img src="assets/Schema.png" style="width: 400px; height: 200px;">
+            <p>Vom utiliza si <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules">module</a> pentru servicii si pentru functii helper.</p>
+            <img src="assets/Helpers1.png" style="width: 400px; height: 200px;">
+            <img src="assets/Helpers2.png" style="width: 400px; height: 200px;">
         </section>
         <section id="detalii-frontend">
             <h4>3.2 Frontend</h4>
-            <p>Pentru a mentine cat mai simpla partea de client, vom folosi doar apeluri asincrone catre API.</p>
+            <p>Pentru a mentine cat mai simpla partea de client, vom folosi doar apeluri asincrone catre API, folosind <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch">fetch</a>.</p>
+            <p>Pentru a mentine independenta de conectivitate si pentru a transforma aplicatia intr-un PWA, pe partea de front vom folosi un Service Worker, care va gestiona fisierele si apelurile fetch catre API.</p>
+            <p>Service Worker-ul va mentine in cache intreaga structura de fisiere si response-urile la apelurile fetch. O portiune din Service Worker ar trebui sa arate asa:</p>
+            <img src="assets/ServiceWorker.png" style="width: 400px; height: 200px;">
+            <p>Notificarile vor fi electronice via <a href="https://nodemailer.com/about/">nodemailer</a> si userii vor primi notificari atunci cand au fost asignati de catre altcineva unui task si atunci cand cineva le raspunde cu pozitiv sau respins la
+                taskul creat de ei:</p>
+            <img src="assets/Notifications.png" style="width: 400px; height: 200px;">
         </section>
         <section id="detalii-API">
             <h4>3.3 API</h4>
-            <p><a href="https://smartbear.com/learn/performance-monitoring/api-endpoints/">Endpoint</a>-urile vor fi:
+            <p><a href="https://smartbear.com/learn/performance-monitoring/api-endpoints/">Endpoint</a>-urile si intreaga schema Backend sunt documentate folosind <a href="https://swagger.io/">Swagger</a> la adresa <a href="https://tasorapi.herokuapp.com/api-docs/">https://tasorapi.herokuapp.com/api-docs/</a>:
             </p>
-            <div style="margin-left: 15px;">
-                <p> '/register' - POST ==> creaza un nou user in baza de date : <a href="#frontend">Clientul</a> trimite
-                    informatiile structurate intr-un <a href="http://www.json.org/">JSON</a>. </p>
-                <p> '/login' - POST ==> se verifica parola : <a href="#frontend">Clientul</a> trimite
-                    informatiile structurate intr-un <a href="http://www.json.org/">JSON</a></p>
-                <p> '/createdtasks' - GET ==> task-urile create de utilizator: <a href="#backend">Serverul</a> trimite
-                    informatiile structurate intr-un <a href="http://www.json.org/">JSON</a></p>
-                <p> '/asignedtasks' - GET ==> task-urile unui utilizator: <a href="#backend">Serverul</a> trimite
-                    informatiile structurate intr-un <a href="http://www.json.org/">JSON</a></p>
-                <p> '/taskresponse' - POST ==> raspunul unui task : task-urile create de utilizator: <a
-                        href="#frontend">Clientul</a> trimite
-                    informatiile structurate intr-un <a href="http://www.json.org/">JSON</a></p>
-            </div>
+            <img src="assets/Backend.png" style="width: 400px; height: 200px;">
+        </section>
+        <section id="securitate">
+            <h4>3.4 Securitate</h4>
+            <p>Folosim <a href="https://jwt.io/">JSON Web Token</a> pentru autentificare si securitate astfel:</p>
+            <p>La login sau register, folosind _id-ul(email-ul) user-ului, generam pe server un token pe care il trimitem in response catre client</p>
+            <p>Pentru apeluri la API, clientul trebuie sa includa tagul "Authorization" cu cheia "Bearer token" unde token este jwt-ul trimis de server</p>
+            <p>Serverul verifica headerul requestului, apoi decodifica jwt-ul si executa mai departe codul!</p>
+            <p>Un exemplu de verificare a unui token :</p>
+            <img src="assets/Token.png" style="width: 400px; height: 200px;">
         </section>
     </section>
 
     <section id="flow">
         <h2>4. Flow-ul aplicatiei</h2>
-        <p>Un user poate propune un task si poate adauga o persoana sa il execute intr-o perioada de timp specificata
+        <p>Un user poate propune un task si poate adauga o persoana sau mai multe sa il execute intr-o perioada de timp specificata
         </p>
-        <p>Doar userul care a propus task-ul si cel care este adaugat la task poate viziona informatiile despre taskul
-            respectiv</p>
-        <p>Userul care a propus task-ul poate expune public informatiile despre task</p>
+        <p>Doar userul care a propus task-ul si cel care este adaugat la task poate viziona informatiile despre taskul respectiv
+        </p>
         <p>Fiecare task contine : </p>
         <div style="margin-left: 15px;">
-            <p>-interval orar sau data de finish </p>
+            <p>-data de finish </p>
             <p>-descriere acestuia </p>
-            <p>-skill-uri/cunostinte necesare (optional)</p>
-            <p>-framework-uri necesare(optional)</p>
+            <p>-Linkuri utile</p>
+            <p>-Informatii aditionale</p>
         </div>
-        <p>Dupa finalizarea task-ului, userul asignat task-ului respectiv, adauga dovezi(un url, o poza, cod sursa,
-            text, documente etc.)</p>
+        <p>Dupa finalizarea task-ului, userul asignat task-ului respectiv, adauga dovezi(un url)</p>
         <p>Functionalitati: </p>
         <div style="margin-left: 15px;">
-            <p>-istoric al taskurilor : pentru fiecare user, pentru fiecare tip de task (task creat de el sau task la
-                care a fost asignat) avem liste cu taskurile precedente</p>
+            <p>-istoric al taskurilor : pentru fiecare user, pentru fiecare tip de task (task creat de el sau task la care a fost asignat) avem liste cu taskurile precedente</p>
             <p>-statistici : pentru toti userii, pe o pagina separata vom oferi statistici (proprii si globale)</p>
-            <p>-notificari : acestea vor aparea in browser, pentru fiecare user</p>
+            <p>-notificari : acestea vor aparea in posta electronica, pentru fiecare user</p>
         </div>
 
     </section>

@@ -1,0 +1,31 @@
+{
+
+
+
+
+
+    "Task": {
+        "_id": "string",
+        "taskName": "string",
+        "description": "string",
+        "utilLinks": "string",
+        "info": "string",
+        "date": "datetime",
+        "assignedTo": "Array(string)",
+        "createdBy": "string",
+        "_finalized": "boolean",
+        "_rejected": "boolean",
+        "message": "string"
+    },
+
+    "User": {
+        "_id": "string",
+        "password": "string"
+    }
+
+
+
+
+
+
+}
